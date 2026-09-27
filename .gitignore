@@ -1,5 +1,3 @@
 .env
 .env.*
-pipeline-log.md
-.worktrees/
 .claude/settings.local.json
