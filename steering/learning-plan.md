@@ -17,7 +17,7 @@
 | UI primitives | shadcn |
 | Styling | Tailwind CSS |
 | Font | Inter |
-| Hosting | Vercel (Phase 3) |
+| Hosting | Local containers via Podman — single `podman-compose.yml` + build script (Phase 3) |
 
 ---
 
@@ -48,7 +48,7 @@
 | Phase | Persistence | Auth |
 |---|---|---|
 | 1–2 | localStorage | None |
-| 3 | Postgres via Prisma + Supabase | NextAuth or Supabase Auth |
+| 3 | Postgres via Prisma, containerized (Podman) | NextAuth |
 
 ---
 
@@ -91,16 +91,18 @@
 | Week | Focus |
 |---|---|
 | 1 | Accessibility audit + responsive design + empty/error/loading states |
-| 2 | Database migration: Postgres via Prisma + Supabase; add auth |
+| 2 | Database migration: Postgres via Prisma, containerized alongside the app; add auth via NextAuth |
 | 3 | Design system documentation site (built with the same stack) |
-| 4 | Deploy to Vercel; final QA and portfolio write-up |
+| 4 | Single `podman-compose.yml` + build script bringing up app + Postgres together; final QA and portfolio write-up |
 
-**Deliverable:** Shipped product + public design system reference site.
+**Deliverable:** Fully working product + design system reference site, both running locally via Podman Compose.
 
 ---
 
 ## Learner Context
 
-- Background: Python (backend), no prior JavaScript or TypeScript experience
-- Learning mode: Agentic — agent handles scaffolding and boilerplate; learner directs, reviews, and understands decisions
-- Pace: ~1 month per phase, with agentic acceleration
+- Background: Java, HTML, CSS — programming-literate but shallow; no prior TypeScript, React, or Next.js experience
+- Goal: **not** to become a developer — to reach support-lead code literacy: read and trace code, recognize common patterns on sight, read a diff/PR and follow the intent, hold enough vocabulary to talk to engineers credibly, reproduce and localize a bug before escalating, and make small safe fixes
+- Learning mode: Agentic build (agent handles scaffolding and boilerplate via copy-paste, for speed) layered with a fixed lessons plan — see `steering/lessons-plan.md` for the lesson-by-lesson breakdown, objectives, and format
+- Pace: hard cap — 1 month total, **12 hours total hands-on learner time** (not per week), self-paced in 90-minute lessons around work availability; little to no hands-on time expected during working hours
+- Full app scope (all 3 phases, 5 screens, design system, backend migration, deploy) stays intact — the agent builds it fast via copy-paste so the output remains presentable, while lesson time is reserved for comprehension, not typing speed
