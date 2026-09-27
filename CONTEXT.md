@@ -7,6 +7,37 @@ definitions only, no implementation detail.
 
 ## Project Vocabulary
 
-<!-- Fill in project-specific terms as they get resolved during the build. -->
-<!-- Format: **term** — one sentence definition. -->
-<!-- Example: **user** — a person with an account who can log in and manage their own data. -->
+**Note**:
+A single piece of captured text with a title and body. Belongs to at most
+one Folder and any number of Tags.
+_Avoid_: Document, entry, page — this app is for short capture, not documents.
+
+**Folder**:
+A single-level container for Notes, used for filing. A Note has at most one
+Folder (or none). Folders do not nest.
+_Avoid_: Notebook, directory, category.
+
+**Tag**:
+A label attached to a Note for cross-cutting organization, independent of
+Folder. A Note can have any number of Tags; a Tag can apply to any number
+of Notes.
+_Avoid_: Label, category.
+
+**Settings**:
+The single record of a User's app-wide preferences (currently just theme).
+Not per-Note or per-Folder. Each User has exactly one Settings record.
+_Avoid_: Preferences, config.
+
+**User**:
+An authenticated account. Owns all of their own Notes, Folders, Tags, and
+Settings — nothing is shared between Users. Identified by email; every
+other entity in the app exists only in the context of a User.
+_Avoid_: Account — User is the term used consistently across the codebase
+and lesson content.
+
+**Repository**:
+The persistence seam — one interface with swappable implementations
+(localStorage in Phases 1-2, Postgres/Prisma in Phase 3). Callers never
+talk to storage directly.
+_Avoid_: Store, DAO, service — Repository is the term used consistently
+across the codebase and lesson content.

@@ -1,8 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies (unrooted: applies inside frontend/, backend/, db/ too)
-node_modules
-.pnp
+# dependencies
+/node_modules
+/.pnp
 .pnp.*
 .yarn/*
 !.yarn/patches
@@ -11,17 +11,14 @@ node_modules
 !.yarn/versions
 
 # testing
-coverage
+/coverage
 
 # next.js
-.next/
-out/
+/.next/
+/out/
 
 # production
-build
-
-# prisma generated client (regenerated via `npm run db:generate` in db/)
-backend/generated/
+/build
 
 # misc
 .DS_Store
@@ -43,6 +40,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-# claude code
-.claude/settings.local.json
