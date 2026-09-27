@@ -1,3 +1,5 @@
+@AGENTS.md
+
 # Note-Taking App — Learning Project
 
 This repo builds a note-taking app (Next.js + TypeScript + shadcn + Tailwind,
@@ -23,5 +25,10 @@ a solo learning build, not a governed SDLC process.
 
 ## Dev commands
 
-To be filled in once the app is scaffolded (Lesson 1): install, dev server,
-test run, and `podman-compose up` for the local Postgres + app stack.
+- Install: `npm install`
+- Dev server: `npm run dev`
+- Lint: `npm run lint`
+- Build: `npm run build`
+- Test: `npm test`
+- Local Postgres + app stack: `scripts/build-and-run.sh` (wraps
+  `podman-compose build && podman-compose up`)
