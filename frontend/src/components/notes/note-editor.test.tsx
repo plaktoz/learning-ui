@@ -19,7 +19,7 @@ describe("NoteEditor autosave", () => {
 
     const user = userEvent.setup();
     render(
-      <AppDataProvider>
+      <AppDataProvider repository={repo}>
         <NoteEditor noteId={note.id} />
       </AppDataProvider>
     );

@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { LocalStorageRepository } from "@/lib/repository/local-storage-repository";
+import { ApiRepository } from "@/lib/repository/api-repository";
 import type {
   Folder,
   Note,
@@ -49,11 +49,19 @@ interface AppData {
 const AppDataContext = React.createContext<AppData | null>(null);
 
 function createRepository(): Repository {
-  return new LocalStorageRepository();
+  return new ApiRepository();
 }
 
-function AppDataProvider({ children }: { children: React.ReactNode }) {
-  const [repository] = React.useState<Repository>(createRepository);
+function AppDataProvider({
+  children,
+  repository: repositoryOverride,
+}: {
+  children: React.ReactNode;
+  repository?: Repository;
+}) {
+  const [repository] = React.useState<Repository>(
+    () => repositoryOverride ?? createRepository()
+  );
 
   const [loading, setLoading] = React.useState(true);
   const [notes, setNotes] = React.useState<Note[]>([]);
