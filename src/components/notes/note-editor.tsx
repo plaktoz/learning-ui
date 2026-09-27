@@ -32,17 +32,18 @@ function NoteEditor({ noteId }: { noteId: string }) {
     setBody(note.body);
   }, [note]);
 
-  // Memoize the save handler so the debounce effect below doesn't have to
-  // recreate a new function on every render.
-  const saveNote = React.useCallback(() => {
-    updateNote(noteId, { title, body });
-  }, [noteId, updateNote]);
-
   React.useEffect(() => {
+    // Guards against saving before this note's content has been loaded, and
+    // against saving into a note that no longer exists. Deliberately keyed
+    // on noteId/updateNote (both stable) rather than the `note` object,
+    // whose reference changes on every save — depending on it here would
+    // restart the debounce timer on every save and never let it settle.
     if (loadedNoteId.current !== noteId) return;
-    const timeoutId = setTimeout(saveNote, AUTOSAVE_DELAY_MS);
+    const timeoutId = setTimeout(() => {
+      updateNote(noteId, { title, body });
+    }, AUTOSAVE_DELAY_MS);
     return () => clearTimeout(timeoutId);
-  }, [noteId, saveNote]);
+  }, [title, body, noteId, updateNote]);
 
   function toggleTag(tagId: string) {
     if (!note) return;
