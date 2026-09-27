@@ -1,0 +1,44 @@
+services:
+  db:
+    image: docker.io/library/postgres:16-alpine
+    environment:
+      POSTGRES_USER: noteapp
+      POSTGRES_PASSWORD: noteapp
+      POSTGRES_DB: noteapp
+    ports:
+      - "5432:5432"
+    volumes:
+      - noteapp-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U noteapp"]
+      interval: 2s
+      timeout: 5s
+      retries: 20
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "4000:4000"
+    environment:
+      DATABASE_URL: postgresql://noteapp:noteapp@db:5432/noteapp?schema=public
+      SESSION_SECRET: ${SESSION_SECRET}
+      FRONTEND_ORIGIN: http://localhost:3000
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        NEXT_PUBLIC_BACKEND_URL: http://localhost:4000
+    ports:
+      - "3000:3000"
+    environment:
+      BACKEND_INTERNAL_URL: http://backend:4000
+    depends_on:
+      - backend
+
+volumes:
+  noteapp-db-data:
