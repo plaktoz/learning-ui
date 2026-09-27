@@ -24,9 +24,16 @@ of Notes.
 _Avoid_: Label, category.
 
 **Settings**:
-The single record of a user's app-wide preferences (currently just theme).
-Not per-Note or per-Folder.
+The single record of a User's app-wide preferences (currently just theme).
+Not per-Note or per-Folder. Each User has exactly one Settings record.
 _Avoid_: Preferences, config.
+
+**User**:
+An authenticated account. Owns all of their own Notes, Folders, Tags, and
+Settings — nothing is shared between Users. Identified by email; every
+other entity in the app exists only in the context of a User.
+_Avoid_: Account — User is the term used consistently across the codebase
+and lesson content.
 
 **Repository**:
 The persistence seam — one interface with swappable implementations
